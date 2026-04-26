@@ -1,9 +1,29 @@
-# Alias
+# Aliases
 alias dc='cd'
 
 # Most used commands 
 alias muc='history 1 | awk '"'"'{$1="";print substr($0,2)}'"'"' | sort | uniq -c | sort -n | tail -n 10'
+
 alias rm='rm -iv'
+
+# todo function
+# This function recursively searches for the string TODO from the current directory.
+# The match is case-insensitive (todo, Todo, TODO all match).
+#
+# Usages:
+# todo
+#   Shows every TODO grep finds in any file under the current directory.
+# todo <extension>
+#   <extension> restricts the search to *.<extension> files.
+#   For instance: `todo py` searches only in .py files.
+# todo <extension> <comment_char>
+#   <extension> works as above. <comment_char> is the character used to mark
+#   comments in the file, so the pattern matches: anything + <comment_char>
+#   + (optional space/tab) + TODO. Python uses `#`, so `todo py #` matches
+#   both `#TODO` and `# TODO`.
+todo() {
+    find . -type f -name "*${1:+.$1}" -exec grep -Hin ".*${2:+$2[[:blank:]]*}TODO.*" {} + | awk -F: '{print $1 " - Line:" $2}'
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
