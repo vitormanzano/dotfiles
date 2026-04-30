@@ -58,7 +58,7 @@ parse_git_branch() {
     local branch
     branch=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p')
     if [ -n "$branch" ]; then
-        echo "%F{39}git:(%F{196}${branch}%F{39})"
+        echo "%F{39}git(%F{196}${branch}%F{39})"
     fi
 }
 COLOR_DEF='%f'
