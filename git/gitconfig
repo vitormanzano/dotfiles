@@ -1,0 +1,9 @@
+[user]
+	email = 160519411+vitormanzano@users.noreply.github.com
+	name = vitormanzano
+[core]
+	autocrlf = input
+	editor = nvim
+	excludesfile = /Users/vimanzanovd/.gitignore_global
+[commit]
+	template = /Users/vimanzanovd/.gitmessage.txt
