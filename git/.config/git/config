@@ -1,0 +1,11 @@
+[user]
+	email = 160519411+vitormanzano@users.noreply.github.com
+	name = vitormanzano
+[core]
+	autocrlf = input
+	editor = nvim
+	excludesfile = ~/.config/git/gitignore_global
+[commit]
+	template = ~/.config/git/gitmessage.txt
+[credential]
+	helper = store
