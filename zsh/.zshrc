@@ -29,6 +29,12 @@ todo() {
     find . -type f -name "*${1:+.$1}" -exec grep -Hin ".*${2:+$2[[:blank:]]*}TODO.*" {} + | awk -F: '{print $1 " - Line:" $2}'
 }
 
+# Telling to nvim leave the cursor configuration as the ghostty
+nvim() {
+    command nvim "$@"
+    printf '\e[1 q'
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
