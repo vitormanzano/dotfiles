@@ -1,3 +1,5 @@
+
+
 return {
   'nvim-lualine/lualine.nvim', -- Lualine requires nvim-web-devicons for filetype icons
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -15,7 +17,13 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_b = { 
+            {
+                'branch', 
+                icon = ''
+            }, 
+            'diff', 
+            'diagnostics' },
         lualine_c = { 'filename' },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
@@ -24,3 +32,4 @@ return {
     })
   end,
 }
+

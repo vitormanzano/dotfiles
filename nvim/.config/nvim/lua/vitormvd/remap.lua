@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-
+vim.keymap.set("n", "<leader>fj", "<cmd>Oil<cr>")
 -- Copy
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -15,4 +15,3 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("x", "<leader>p", [["_dP]])
