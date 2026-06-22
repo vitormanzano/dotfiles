@@ -33,8 +33,13 @@ hl.config({
 
 hl.env("GTK_IM_MODULE", "simple") -- config for using accents in ghostty
 
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+ hl.config({
+  ecosystem = {
+    enforce_permissions = true,
+  },
+})
 
+hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+hl.permission("/usr/(bin|local/bin)/hyprlock", "screencopy", "allow")
+hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 
