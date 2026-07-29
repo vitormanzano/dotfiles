@@ -1,4 +1,4 @@
--- Fix package.path so require() can find files in modules/
+--, user.Password.PasswordValue , user.Password.PasswordValueFix package.path so require() can find files in modules/
 package.path = package.path .. ";" .. (os.getenv("HOME") or "") .. "/.config/hypr/?.lua"
 
 -- Programs used across modules
@@ -43,3 +43,12 @@ hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 hl.permission("/usr/(bin|local/bin)/hyprlock", "screencopy", "allow")
 hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 
+
+-- Variáveis de ambiente (Qt/KDE apps)
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+
+-- Autostart (equivalente ao antigo exec-once)
+hl.on("hyprland.start", function()
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")  -- GTK4/libadwaita
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'")        -- GTK3 (precisa do adw-gtk3)
+end)

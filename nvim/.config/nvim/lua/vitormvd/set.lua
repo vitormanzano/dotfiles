@@ -12,6 +12,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 vim.opt.linebreak = true  -- break the word 
 vim.opt.wrap = true 

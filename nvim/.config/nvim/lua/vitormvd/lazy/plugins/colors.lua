@@ -7,6 +7,8 @@ return {
     "scottmckendry/cyberdream.nvim",
     "nyoom-engineering/oxocarbon.nvim",
     "folke/tokyonight.nvim",
+    "AlexvZyl/nordic.nvim",
+    { "catppuccin/nvim", name = "catppuccin" },
   },
   config = function()
     vim.opt.background = "dark"
@@ -27,16 +29,16 @@ return {
       style = "night",
       transparent = true,
     })
-    -- oxocarbon não tem flag de transparência; o autocmd abaixo resolve
 
-    -- força transparência em QUALQUER tema (cobre o oxocarbon também)
-    vim.api.nvim_create_autocmd("ColorScheme", {
-      callback = function()
-        for _, g in ipairs({ "Normal", "NormalNC", "NormalFloat", "FloatBorder", "SignColumn" }) do
-          vim.api.nvim_set_hl(0, g, { bg = "none" })
-        end
-      end,
+    require("nordic").setup({
+        transparent = { bg = true, float = true },
     })
-    vim.cmd("colorscheme rose-pine")
+
+    require("catppuccin").setup({
+      flavour = "mocha",
+      transparent_background = true,
+    })
+
+vim.cmd("colorscheme rose-pine")
   end
 }

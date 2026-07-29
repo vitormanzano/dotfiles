@@ -7,7 +7,7 @@ hl.config({
         kb_layout  = "us",
         kb_variant = "alt-intl",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "compose:rwin",
         kb_rules   = "",
 
         follow_mouse = 1,

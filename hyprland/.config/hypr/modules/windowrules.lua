@@ -38,7 +38,7 @@ hl.window_rule({
 hl.window_rule({
     name = "move-music",
     match = { class = "Spotify" },
-    workspace = 3,
+    workspace = 6,
 })
 
 hl.window_rule({

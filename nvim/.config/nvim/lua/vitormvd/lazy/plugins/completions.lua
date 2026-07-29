@@ -17,6 +17,12 @@ return {
         default = { "lsp", "path", "snippets", "buffer" },
       },
       completion = {
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
+        },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
