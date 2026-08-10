@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "angularls", "eslint" })
@@ -14,7 +14,7 @@ return {
         "ngserver",
         "--stdio",
         "--tsProbeLocations", mason_path,
-        "--ngProbeLocations",  mason_path,
+        "--ngProbeLocations", mason_path,
       }
 
       opts.servers = opts.servers or {}

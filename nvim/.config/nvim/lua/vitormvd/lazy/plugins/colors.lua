@@ -5,7 +5,6 @@ return {
   priority = 1000,
   dependencies = {
     "scottmckendry/cyberdream.nvim",
-    "nyoom-engineering/oxocarbon.nvim",
     "folke/tokyonight.nvim",
     "AlexvZyl/nordic.nvim",
     { "catppuccin/nvim", name = "catppuccin" },
