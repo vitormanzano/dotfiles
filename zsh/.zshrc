@@ -10,6 +10,8 @@ alias nv='nvim'
 
 alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
 
+alias po='sudo poweroff'
+
 # todo function
 # This function recursively searches for the string TODO from the current directory.
 # The match is case-insensitive (todo, Todo, TODO all match).
@@ -133,3 +135,4 @@ export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 
 
+export PATH="$HOME/.local/bin:$PATH"
