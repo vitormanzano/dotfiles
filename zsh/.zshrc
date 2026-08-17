@@ -126,7 +126,6 @@ eval "$(pyenv init -)"
 
  
 eval "$(starship init zsh)"
-fastfetch --logo ~/.config/fastfetch/mylogo.txt
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
@@ -136,3 +135,4 @@ export PATH=~/.npm-global/bin:$PATH
 
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
