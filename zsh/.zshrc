@@ -129,7 +129,7 @@ eval "$(starship init zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
-. "$HOME/.local/share/../bin/env"
+[ -s "$HOME/.local/bin/env" ] && \. "$HOME/.local/bin/env"
 export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 
