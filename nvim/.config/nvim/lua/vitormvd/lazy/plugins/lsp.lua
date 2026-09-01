@@ -1,111 +1,176 @@
- return {
+return {
     {
-      "williamboman/mason.nvim",
-      config = function()
-        require("mason").setup()
-      end,
+        "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup({
+                registries = {
+                    "github:mason-org/mason-registry",
+                    "github:Crashdummyy/mason-registry",
+                },
+            })
+        end,
     },
     {
-      "williamboman/mason-lspconfig.nvim",
-      dependencies = { "williamboman/mason.nvim" },
-      opts = {
-        ensure_installed = {
-          "html",
-          "cssls",
-          "ts_ls",
-          "clangd",
-          "lua_ls",
-          "rust_analyzer",
-          "gopls",
-          "angularls",
-          "eslint",
-        },
-      },
-    },
-    {
-      "neovim/nvim-lspconfig",
-      dependencies = {
-        "saghen/blink.cmp",
         "williamboman/mason-lspconfig.nvim",
-        {
-          "folke/lazydev.nvim",
-          ft = "lua",
-          opts = {
-            library = {
-              { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-            },
-          },
-        },
-      },
-      config = function()
-        local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-        vim.lsp.config("*", { capabilities = capabilities })
-
-        local on_attach = function(_, bufnr)
-          local opts = { buffer = bufnr, silent = true }
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-          vim.keymap.set("n", "<leader>f", function()
-            vim.lsp.buf.format({ async = true })
-        end, opts)
-      end
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          on_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "ts_ls",
+                    "gopls",
+                    -- "omnisharp",
+                    "svelte",
+                    "tailwindcss",
+                    -- "phpactor",
+                    "intelephense",
+                    "gdscript",
+                    "gdtoolkit",
+                    "astro",
+                    "html",
+                    "clangd",
+                    -- "roslyn",
+                    "rust_analyzer",
+                    "templ",
+                    "kotlin_language_server",
+                    "zls",
+                    "ols",
+                    "cssls",
+                    "pyright"
+                },
+            })
         end,
-      })
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            -- require("mason-lspconfig").setup_handlers({
+            -- 	-- The first argument is a function that gets called for each server
+            -- 	-- that is installed with Mason.
+            -- 	function(server_name)
+            -- 		require("lspconfig")[server_name].setup({
+            -- 			-- You can add capabilities for autocompletion engines here
+            -- 			-- capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- 		})
+            -- 	end,
+            --
+            -- 	-- You can also override settings for specific servers here
+            -- 	["lua_ls"] = function()
+            -- 		require("lspconfig").lua_ls.setup({
+            -- 			settings = {
+            -- 				Lua = {
+            -- 					diagnostics = {
+            -- 						globals = { "vim" },
+            -- 					},
+            -- 				},
+            -- 			},
+            -- 		})
+            -- 	end,
+            -- })
+            vim.lsp.config("ts_ls", {})
+            vim.lsp.enable({ "ts_ls" })
+            vim.lsp.config("gopls", {})
+            vim.lsp.enable({ "gopls" })
+            vim.lsp.config("gdscript", {})
+            vim.lsp.enable({ "gdscript" })
+            vim.lsp.config("gdtoolkit", {})
+            vim.lsp.enable({ "gdtoolkit" })
+            -- local lspconfig = require("lspconfig")
+            -- lspconfig.lua_ls.setup({})
+            -- lspconfig.ts_ls.setup({})
+            -- lspconfig.gopls.setup({})
+            -- lspconfig.gdscript.setup({})
+            -- lspconfig.svelte.setup({})
+            -- lspconfig.tailwindcss.setup({})
+            -- lspconfig.intelephense.setup({})
+            -- lspconfig.astro.setup({})
+            -- lspconfig.html.setup({})
+            -- lspconfig.clangd.setup({})
+            -- lspconfig.roslyn.setup({})
+            -- lspconfig.rust_analyzer.setup({})
+            -- lspconfig.templ.setup({})
+            -- lspconfig.kotlin_language_server.setup({
+            -- 	filetypes = { "kotlin", "kt", "kts" },
+            -- })
+            -- lspconfig.zls.setup({})
 
-      local servers = { "html", "cssls", "clangd", "rust_analyzer", "gopls", "ts_ls" }
-      for _, server in ipairs(servers) do
-        vim.lsp.enable(server)
-      end
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+                callback = function(event)
+                    local map = function(keys, func, desc)
+                        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+                    end
 
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            diagnostics = { globals = { "vim" } },
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-          },
-        },
-      })
-      vim.lsp.enable("lua_ls")
+                    -- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+                    -- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+                    -- map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+                    -- map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+                    -- map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+                    -- map(
+                    -- 	"<leader>ws",
+                    -- 	require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                    -- 	"[W]orkspace [S]ymbols"
+                    -- )
+                    map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+                    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+                    map("gh", vim.lsp.buf.hover, "Hover Documentation")
+                    map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+                    local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    if client and client.name == "gopls" then
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            buffer = event.buf,
+                            callback = function()
+                                local params = vim.lsp.util.make_range_params(0, "utf-8")
+                                params.context = { only = { "source.organizeImports" } }
 
-      -- Angular
-      local mason_path = vim.fn.stdpath("data") .. "/mason/packages/angular-language-server"
-      local ng_cmd = {
-        "ngserver",
-        "--stdio",
-        "--tsProbeLocations", mason_path,
-        "--ngProbeLocations", mason_path,
-      }
-      vim.lsp.config("angularls", {
-        cmd = ng_cmd,
-        filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
-        root_dir = require("lspconfig.util").root_pattern("angular.json", "project.json"),
-      })
-      vim.lsp.enable("angularls")
+                                local result = vim.lsp.buf_request_sync(event.buf, "textDocument/codeAction", params,
+                                    1000)
+                                for _, res in pairs(result or {}) do
+                                    for _, action in pairs(res.result or {}) do
+                                        if action.edit then
+                                            vim.lsp.util.apply_workspace_edit(action.edit, "utf-8")
+                                        end
 
-      -- ESLint
-      vim.lsp.config("eslint", {
-        settings = {
-          workingDirectory = { mode = "auto" },
-          format = true,
-          run = "onType",
-        },
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
+                                        if action.command then
+                                            vim.lsp.buf.execute_command(action.command)
+                                        end
+
+                                        return
+                                    end
+                                end
+                            end,
+                        })
+                    end
+                    if client and client.server_capabilities.documentHighlightProvider then
+                        local highlight_augroup =
+                            vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+                        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                            buffer = event.buf,
+                            group = highlight_augroup,
+                            callback = vim.lsp.buf.document_highlight,
+                        })
+
+                        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                            buffer = event.buf,
+                            group = highlight_augroup,
+                            callback = vim.lsp.buf.clear_references,
+                        })
+
+                        vim.api.nvim_create_autocmd("LspDetach", {
+                            group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+                            callback = function(event2)
+                                vim.lsp.buf.clear_references()
+                                vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+                            end,
+                        })
+                    end
+
+                    if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                        map("<leader>th", function()
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                        end, "[T]oggle Inlay [H]ints")
+                    end
+                end,
+            })
         end,
-      })
-      vim.lsp.enable("eslint")
-    end,
-  },
+    },
 }

@@ -12,6 +12,10 @@ alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
 
 alias po='sudo poweroff'
 
+alias agenda='calcurse'
+
+alias i='pacman -S'
+
 # todo function
 # This function recursively searches for the string TODO from the current directory.
 # The match is case-insensitive (todo, Todo, TODO all match).
