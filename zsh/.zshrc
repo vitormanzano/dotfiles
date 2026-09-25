@@ -16,6 +16,8 @@ alias agenda='calcurse'
 
 alias i='pacman -S'
 
+alias fullstack='xdg-open ~/onedrive/fullstack-guia-completo.html'
+
 # todo function
 # This function recursively searches for the string TODO from the current directory.
 # The match is case-insensitive (todo, Todo, TODO all match).
@@ -140,3 +142,12 @@ export PATH=~/.npm-global/bin:$PATH
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/vimanzanovd/.local/bin:$PATH"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"

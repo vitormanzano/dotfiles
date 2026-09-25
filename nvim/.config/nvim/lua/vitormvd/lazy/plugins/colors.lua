@@ -43,6 +43,6 @@ return {
             style = 'darker'
         })
 
-        vim.cmd("colorscheme rose-pine")
+        vim.cmd("colorscheme nordic")
     end
 }
