@@ -18,6 +18,8 @@ alias i='pacman -S'
 
 alias fullstack='xdg-open ~/onedrive/fullstack-guia-completo.html'
 
+alias h='herdr'
+
 # todo function
 # This function recursively searches for the string TODO from the current directory.
 # The match is case-insensitive (todo, Todo, TODO all match).
