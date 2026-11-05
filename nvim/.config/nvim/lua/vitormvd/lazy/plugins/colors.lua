@@ -8,6 +8,9 @@ return {
         "scottmckendry/cyberdream.nvim",
         "folke/tokyonight.nvim",
         "AlexvZyl/nordic.nvim",
+        "vague-theme/vague.nvim",
+        "evergardentheme/nvim",
+        "ellisonleao/gruvbox.nvim",
         { "catppuccin/nvim", name = "catppuccin" },
     },
     config = function()
@@ -20,14 +23,61 @@ return {
             styles = { bold = true, italic = true, transparency = true },
         })
 
+        require("evergarden").setup({
+            theme = {
+                variant = 'fall',
+                accent = 'green',
+            },
+            editor = {
+
+            }
+        })
+
+        require("vague").setup({
+            transparent = true,
+            italic = true,
+        })
+
         require("cyberdream").setup({
             transparent = true,
             italic_comments = true,
         })
 
+        require("gruvbox").setup({
+            terminal_colors = true,
+            undercurl = true,
+            underline = true,
+            bold = true,
+            italic = {
+                strings = true,
+                emphasis = true,
+                comments = true,
+                operators = false,
+                folds = true,
+            },
+            strikethrough = true,
+            invert_selection = false,
+            invert_signs = false,
+            invert_tabline = false,
+            inverse = true, -- invert background for search, diffs, statuslines and errors
+            contrast = "",  -- can be "hard", "soft" or empty string
+            palette_overrides = {},
+            overrides = {},
+            dim_inactive = false,
+            transparent_mode = true,
+        })
+
         require("tokyonight").setup({
             style = "night",
-            transparent = true,
+            light_style = "day",
+            transparent = false,
+            terminal_colors = true,
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = true },
+                sidebars = "dark",
+                floats = "dark",
+            },
         })
 
         require("nordic").setup({
@@ -35,14 +85,27 @@ return {
         })
 
         require("catppuccin").setup({
-            flavour = "mocha",
+            flavour = "auto",
+            background = {
+                light = "latte",
+                dark = "mocha",
+            },
             transparent_background = true,
+            term_colors = true,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                nvimtree = true,
+                treesitter = true,
+                telescope = { enabled = true },
+                mini = { enabled = true },
+            },
         })
 
         require("onedark").setup({
             style = 'darker'
         })
 
-        vim.cmd("colorscheme nordic")
+        vim.cmd("colorscheme gruvbox")
     end
 }

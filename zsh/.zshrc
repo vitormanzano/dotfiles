@@ -20,6 +20,9 @@ alias fullstack='xdg-open ~/onedrive/fullstack-guia-completo.html'
 
 alias h='herdr'
 
+alias light="gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'"
+alias dark="gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+
 # todo function
 # This function recursively searches for the string TODO from the current directory.
 # The match is case-insensitive (todo, Todo, TODO all match).
