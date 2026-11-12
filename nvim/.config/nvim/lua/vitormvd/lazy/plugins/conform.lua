@@ -10,6 +10,7 @@ return {
             html = { "prettier" },
             css = { "prettier" },
             yaml = { "prettier" },
+            go = { "goimports", "gofmt" }
         },
         format_on_save = {
             timeout_ms = 500,

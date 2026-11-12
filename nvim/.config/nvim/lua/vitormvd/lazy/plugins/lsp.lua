@@ -23,6 +23,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("n", "<leader>fr", telescope.lsp_references, "Telescope References")
         map("n", "<leader>fi", telescope.lsp_implementations, "Telescope Implementations")
         map("n", "<leader>vs", telescope.lsp_document_symbols, "Telescope Symbols")
+        map("n", "<leader>vws", telescope.lsp_dynamic_workspace_symbols, "Workspace Symbols (Search Everywhere)")
+        map({ "n", "v" }, "<M-CR>", vim.lsp.buf.code_action, "Code Actions (Alt+Enter)")
+        map("n", "<leader>ih", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+        end, "Toggle Inlay Hints")
 
         -- Keymaps for Diagnostics
         map("n", "gl", vim.diagnostic.open_float, "Show Line Diagnostics")
@@ -62,6 +67,7 @@ return {
         opts = {
             ensure_installed = {
                 "prettier",  -- Formatter (HTML, CSS, JS, TS, YAML, JSON)
+                "tree-sitter-cli", -- Necessário para o nvim-treesitter (branch main) compilar parsers
             },
         },
     },

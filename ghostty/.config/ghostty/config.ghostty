@@ -13,8 +13,12 @@ confirm-close-surface = false
 window-padding-balance = false
 # 0.87
 # 95% opaque
-background-opacity = 0.95   
-background-blur = 10
+# background-opacity = 0.87   
+# background-blur = 10
+
+background-opacity = 0.80
+background-blur-radius = 40
+
 # frosted glass effect
 # background-opacity = 1.0
 window-save-state = never
@@ -22,8 +26,9 @@ resize-overlay = never
 window-decoration = none
 unfocused-split-opacity = 1
 
+theme = TokyoNight Night
+# Gruvbox Dark
 # automatic light/dark theme switching (1.2.0 format)
-theme = Gruvbox Dark
 
 # Keybindings
 keybind = super+v=paste_from_clipboard

@@ -156,3 +156,6 @@ export PATH="/home/vimanzanovd/.local/bin:$PATH"
 
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
+
+export EDITOR=nvim
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin

@@ -1,0 +1,13 @@
+[mgr]
+show_symlink = true
+
+[opener]
+edit = [
+    { run = "${EDITOR:-nvim} %s", block = true, desc = "Editar", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { url = "*.md", use = "edit" },
+    { mime = "text/*", use = "edit" }
+]
